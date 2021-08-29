@@ -1,0 +1,8 @@
+*.o
+*.cmi
+*.cmx
+*.cache
+*.log
+
+problems/test
+
