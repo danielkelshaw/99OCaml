@@ -74,6 +74,39 @@ let test_p12 =
                                     (P12.decode [Many (4, `a); One `b; Many (2, `c); Many (2, `a); One `d; Many (4, `e)]))
   ]
 
+open P13
+let test_p13 =
+  "P13" >::: [
+    "T1" >:: (fun _ -> assert_equal [Many (4, `a); One `b; Many (2, `c); Many (2, `a); One `d; Many (4, `e)]
+                                    (P13.encode [`a; `a; `a; `a; `b; `c; `c; `a; `a; `d; `e; `e; `e; `e]))
+  ]
+
+let test_p14 =
+  "P14" >::: [
+    "T1" >:: (fun _ -> assert_equal [`a; `a; `b; `b; `c; `c; `c; `c; `d; `d]
+                                    (P14.duplicate [`a; `b; `c; `c; `d]))
+  ]
+
+let test_p15 =
+  "P15" >::: [
+    "T1" >:: (fun _ -> assert_equal [`a; `a; `a; `b; `b; `b; `c; `c; `c]
+                                    (P15.replicate [`a; `b; `c] 3))
+  ]
+
+let test_p16 =
+  "P16" >::: [
+    "T1" >:: (fun _ -> assert_equal [`a; `b; `d; `e; `g; `h; `j]
+                                    (P16.drop [`a; `b; `c; `d; `e; `f; `g; `h; `i; `j] 3))
+  ]
+
+let test_p17 =
+  "P17" >::: [
+    "T1" >:: (fun _ -> assert_equal ([`a; `b; `c], [`d; `e; `f; `g; `h; `i; `j])
+                                    (P17.split [`a; `b; `c; `d; `e; `f; `g; `h; `i; `j] 3));
+    "T2" >:: (fun _ -> assert_equal ([`a; `b; `c; `d], [])
+                                    (P17.split [`a; `b; `c; `d] 5))
+  ]
+
 let test_suite =
   "Problems" >:::
     [
@@ -89,6 +122,11 @@ let test_suite =
       test_p10;
       test_p11;
       test_p12;
+      test_p13;
+      test_p14;
+      test_p15;
+      test_p16;
+      test_p17;
     ]
 
 let _ = 
