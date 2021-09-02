@@ -1,4 +1,5 @@
 open OUnit2
+open Batteries
 
 let test_p01 =
   "P01" >::: [
@@ -107,6 +108,50 @@ let test_p17 =
                                     (P17.split [`a; `b; `c; `d] 5))
   ]
 
+let test_p18 =
+  "P18" >::: [
+    "T1" >:: (fun _ -> assert_equal [`c; `d; `e; `f; `g] (P18.slice [`a; `b; `c; `d; `e; `f; `g; `h; `i; `j] 2 6))
+  ]
+
+let test_p19 =
+  "P19" >::: [
+    "T1" >:: (fun _ -> assert_equal [`d; `e; `f; `g; `h; `a; `b; `c] (P19.rotate [`a; `b; `c; `d; `e; `f; `g; `h] 3));
+    "T2" >:: (fun _ -> assert_equal [`g; `h; `a; `b; `c; `d; `e; `f] (P19.rotate [`a; `b; `c; `d; `e; `f; `g; `h] (-2)))
+  ]
+
+let test_p20 =
+  "P20" >::: [
+    "T1" >:: (fun _ -> assert_equal [`a; `c; `d] (P20.remove_at 1 [`a; `b; `c; `d]))
+  ]
+
+let test_p21 =
+  "P21" >::: [
+    "T1" >:: (fun _ -> assert_equal [`a; `alfa; `b; `c; `d] (P21.insert_at `alfa 1 [`a; `b; `c; `d]));
+    "T2" >:: (fun _ -> assert_equal [`a; `b; `c; `alfa; `d] (P21.insert_at `alfa 3 [`a; `b; `c; `d]));
+    "T3" >:: (fun _ -> assert_equal [`a; `b; `c; `d; `alfa] (P21.insert_at `alfa 4 [`a; `b; `c; `d]))
+  ]
+
+let test_p22 =
+  "P22" >::: [
+    "T1" >:: (fun _ -> assert_equal [4; 5; 6; 7; 8; 9] (P22.range 4 9));
+    "T2" >:: (fun _ -> assert_equal [9; 8; 7; 6; 5 ;4] (P22.range 9 4))
+  ]
+
+let test_p23 =
+  "P23" >::: [
+    "T1" >:: (fun _ -> assert_equal [`g; `d; `a] (P23.rand_select [`a; `b; `c; `d; `e; `f; `g; `h] 3))
+  ]
+
+let test_p24 =
+  "P24" >::: [
+    "T1" >:: (fun _ -> assert_equal [20; 28; 45; 16; 24; 38] (P24.lotto_select 6 49))
+  ]
+
+let test_p25 =
+  "P25" >::: [
+    "T1" >:: (fun _ -> assert_equal [`c; `d; `e; `b; `a; `f] (P25.permutation [`a; `b; `c; `d; `e; `f]))
+  ]
+
 let test_suite =
   "Problems" >:::
     [
@@ -127,6 +172,14 @@ let test_suite =
       test_p15;
       test_p16;
       test_p17;
+      test_p18;
+      test_p19;
+      test_p20;
+      test_p21;
+      test_p22;
+      test_p23;
+      test_p24;
+      test_p25;
     ]
 
 let _ = 
