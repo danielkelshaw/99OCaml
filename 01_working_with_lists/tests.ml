@@ -152,6 +152,20 @@ let test_p25 =
     "T1" >:: (fun _ -> assert_equal [`c; `d; `e; `b; `a; `f] (P25.permutation [`a; `b; `c; `d; `e; `f]))
   ]
 
+let test_p26 =
+  "P26" >::: [
+    "T1" >:: (fun _ -> assert_equal [[`a; `b]; [`a; `c]; [`a; `d]; [`b; `c]; [`b; `d]; [`c; `d]]
+                                    (P26.extract 2 [`a; `b; `c; `d]))
+  ]
+
+let test_p27 =
+  "P27" >::: [
+    "T1" >:: (fun _ -> assert_equal [[[3; 4]; [2]]; [[3; 4]; [1]]; [[2; 4]; [3]]; [[2; 4]; [1]]; 
+                                     [[2; 3]; [4]]; [[2; 3]; [1]]; [[1; 4]; [3]]; [[1; 4]; [2]];
+                                     [[1; 3]; [4]]; [[1; 3]; [2]]; [[1; 2]; [4]]; [[1; 2]; [3]]]
+                                    (P27.group [1; 2; 3; 4] [2;1]))
+  ]
+
 let test_suite =
   "Problems" >:::
     [
@@ -180,6 +194,8 @@ let test_suite =
       test_p23;
       test_p24;
       test_p25;
+      test_p26;
+      test_p27;
     ]
 
 let _ = 
