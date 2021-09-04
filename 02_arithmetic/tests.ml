@@ -51,6 +51,17 @@ let test_p39 =
     "T1" >:: (fun _ -> assert_equal 1000 (List.length (P39.all_primes 2 7920)))
   ]
 
+let test_p40 =
+  "P40" >::: [
+    "T1" >:: (fun _ -> assert_equal (5, 23) (P40.goldbach 28))
+  ]
+
+let test_p41 =
+  "P41" >::: [
+    "T1" >:: (fun _ -> assert_equal [(992, (73, 919)); (1382, (61, 1321)); (1856, (67, 1789)); (1928, (61, 1867))]
+                                    (P41.goldbach_limit 1 2000 50))
+  ]
+
 let test_suite =
   "Problems" >:::
     [
@@ -62,6 +73,9 @@ let test_suite =
       test_p36;
       test_p37;
       test_p38;
+      test_p39;
+      test_p40;
+      test_p41;
     ]
 
 let _ = 
